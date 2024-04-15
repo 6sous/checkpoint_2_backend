@@ -11,12 +11,19 @@ export class CountryResolver {
   }
 
   @Query(() => [Country])
-  countrys(): Promise<Country[]> {
+  getCountries(): Promise<Country[]> {
     return CountryService.findAll();
   }
 
   @Query(() => Country)
-  country(@Arg("code") code: string): Promise<Country | null> {
+  getCountry(@Arg("code") code: string): Promise<Country | null> {
     return CountryService.findOneByCode(code);
+  }
+
+  @Query(() => [Country])
+  getCountriesByContinentId(
+    @Arg("continentId") continentId: number
+  ): Promise<Country[]> {
+    return CountryService.findAllByContinentId(continentId);
   }
 }

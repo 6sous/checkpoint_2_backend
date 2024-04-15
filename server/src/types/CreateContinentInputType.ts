@@ -4,13 +4,4 @@ import { Field, InputType } from "type-graphql";
 export class CreateCountryInput {
   @Field()
   code: string;
-
-  @Field()
-  name: string;
-
-  @Field()
-  emoji: string;
-
-  @Field()
-  continentId: number;
 }

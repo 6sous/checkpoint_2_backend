@@ -6,6 +6,7 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 
 import { CountryResolver } from "./resolvers/country.resolver";
+import { ContinentResolver } from "./resolvers/continent.resolver";
 
 const start = async () => {
   dotenv.config();
@@ -15,7 +16,7 @@ const start = async () => {
   await dataSource.initialize();
 
   const schema = await buildSchema({
-    resolvers: [CountryResolver],
+    resolvers: [CountryResolver, ContinentResolver],
     validate: { forbidUnknownValues: false },
   });
 
