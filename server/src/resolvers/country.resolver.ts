@@ -14,4 +14,9 @@ export class CountryResolver {
   countrys(): Promise<Country[]> {
     return CountryService.findAll();
   }
+
+  @Query(() => Country)
+  country(@Arg("code") code: string): Promise<Country | null> {
+    return CountryService.findOneByCode(code);
+  }
 }

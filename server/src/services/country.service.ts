@@ -14,3 +14,8 @@ export async function findAll(): Promise<Country[]> {
   const countries = await Country.find();
   return countries;
 }
+
+export async function findOneByCode(code: string): Promise<Country | null> {
+  const country = await Country.findOneBy({ code });
+  return country;
+}
