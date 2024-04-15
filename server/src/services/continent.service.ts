@@ -16,3 +16,13 @@ export async function findAll(): Promise<Continent[]> {
   });
   return continents;
 }
+
+export async function findOneByCode(code: string): Promise<Continent | null> {
+  const continent = await Continent.findOne({
+    where: { code },
+    relations: {
+      countries: true,
+    },
+  });
+  return continent;
+}

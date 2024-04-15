@@ -9,6 +9,13 @@ export class ContinentResolver {
     return await ContinentService.findAll();
   }
 
+  @Query(() => Continent, { nullable: true })
+  async getcontinentByCode(
+    @Arg("code") code: string
+  ): Promise<Continent | null> {
+    return await ContinentService.findOneByCode(code);
+  }
+
   @Mutation(() => Continent)
   async createContinent(@Arg("code") code: string): Promise<Continent> {
     return await ContinentService.createContinent({ code });
