@@ -2,17 +2,20 @@ import "reflect-metadata";
 import * as dotenv from "dotenv";
 import { dataSource } from "./config/db";
 import { buildSchema } from "type-graphql";
-import { ApolloServer } from "apollo-server";
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+
+import { CountryResolver } from "./resolvers/country.resolver";
 
 const start = async () => {
   dotenv.config();
 
-  const port = process.env.APP_PORT;
+  const port: number = Number(process.env.APP_PORT);
 
   await dataSource.initialize();
 
   const schema = await buildSchema({
-    resolvers: [],
+    resolvers: [CountryResolver],
     validate: { forbidUnknownValues: false },
   });
 
@@ -21,7 +24,11 @@ const start = async () => {
   });
 
   try {
-    const { url } = await server.listen(port);
+    const { url } = await startStandaloneServer(server, {
+      listen: {
+        port,
+      },
+    });
     console.log(`Server running at ${url}`);
   } catch (error) {
     console.error(error);

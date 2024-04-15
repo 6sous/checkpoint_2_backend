@@ -6,7 +6,7 @@ import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 export class Country extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Field()
   @Column()
@@ -20,10 +20,14 @@ export class Country extends BaseEntity {
   @Column()
   emoji: string;
 
-  constructor(data: { code: string; name: string; emoji: string }) {
+  constructor(
+    data: { code: string; name: string; emoji: string } | null = null
+  ) {
     super();
-    this.code = data.code;
-    this.name = data.name;
-    this.emoji = data.emoji;
+    if (data) {
+      this.code = data.code;
+      this.name = data.name;
+      this.emoji = data.emoji;
+    }
   }
 }

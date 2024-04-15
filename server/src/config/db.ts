@@ -6,6 +6,6 @@ export const dataSource = new DataSource({
   database: "../../db.sqlite",
   entities: [Country],
   logging: true,
-  synchronize: false,
+  synchronize: true,
   migrations: ["migrations/*.ts"],
 });
